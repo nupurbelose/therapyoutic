@@ -2,11 +2,35 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
-      <title>Login and Registration </title>
+      <title>Login</title>
       <link rel="stylesheet" href="log.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+   <a href="log.html" class="logo"> <i class="fas fa-heartbeat"></i> TherapYOUtic </a>
+   
+   <nav class="navbar">
+       <a href="home.html">home</a>
+       <!-- <a href="#services">services</a>
+       <a href="#about">about</a>
+       <a href="#doctors">doctors</a>
+       <a href="#appointments">appointments</a> -->
+       <!-- <a href="#insights">insights</a> -->
+       <a href="calendar.html">calendar</a>
+       <a href="events.html">Events</a>
+       <a href="Post.html">Post</a>
+       <a href="log.html">login</a>  
+       
+   </nav>
+
+   <div id="menu-btn" class="fas fa-bars"></div>
+ </header>
+ 
       <div class="wrapper">
          <div class="title-text">
             <div class="title login">
@@ -65,6 +89,7 @@
             </div>
          </div>
       </div>
+
       <script>
          const loginText = document.querySelector(".title-text .login");
          const loginForm = document.querySelector("form.login");
@@ -84,5 +109,6 @@
            return false;
          });
       </script>
+
    </body>
 </html>
