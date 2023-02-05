@@ -19,19 +19,19 @@
 
 <header class="header">
 
-  <a href="log.html" class="logo"> <i class="fas fa-heartbeat"></i> TherapYOUtic </a>
+  <a href="log.php" class="logo"> <i class="fas fa-heartbeat"></i> TherapYOUtic </a>
   
   <nav class="navbar">
-      <a href="home.html">home</a>
+      <a href="home.php">home</a>
       <!-- <a href="#services">services</a>
       <a href="#about">about</a>
       <a href="#doctors">doctors</a>
       <a href="#appointments">appointments</a> -->
       <!-- <a href="#insights">insights</a> -->
-      <a href="calendar.html">calendar</a>
-      <a href="events.html">Events</a>
+      <a href="calendar.php">calendar</a>
+      <a href="events.php">Events</a>
       <a href="Post.html">Post</a>
-      <a href="log.html">login</a>
+      <a href="log.php">login</a>
 
       
       
