@@ -1,3 +1,12 @@
+<?php
+ require 'config.php';
+if(!empty($_SESSION["id"])){
+  $id = $_SESSION["id"];
+  $result = mysqli_query($conn, "SELECT * FROM signdetails WHERE id = $id");
+  $row = mysqli_fetch_assoc($result);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,19 +30,15 @@
 
 <header class="header">
 
-    <a href="log.html" class="logo"> <i class="fas fa-heartbeat"></i> TherapYOUtic </a>
+    <a href="log.php" class="logo"> <i class="fas fa-heartbeat"></i> TherapYOUtic </a>
     
     <nav class="navbar">
-        <a href="#home">home</a>
-        <!-- <a href="#services">services</a>
-        <a href="#about">about</a>
-        <a href="#doctors">doctors</a>
-        <a href="#appointments">appointments</a> -->
-        <!-- <a href="#insights">insights</a> -->
-        <a href="calendar.html">calendar</a>
-        <a href="events.html">Events</a>
+        <a href="home.php">home</a>
+        <a href="calendar.php">calendar</a>
+        <a href="events.php">Events</a>
         <a href="Post.html">Post</a>
-        <a href="log.html">login</a>
+        <a href="log.php">login</a>
+        <!-- <a href="log.php" class="logout"><fas</a> -->
 
         
         
@@ -50,13 +55,13 @@
 <section class="home" id="home">
 
     <div class="image">
-        <img src="image/home-img.svg" alt="">
+        <img src="img/home-img.svg" alt="">
     </div>
 
     <div class="content">
         <h3>Your Mental Health guide</h3>
         <p>Tell us all about it, we're here for you</p>
-        <a href="contactUs.html" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
+        <a href="contactUs.php" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>
@@ -107,21 +112,21 @@
             <i class="fas fa-calendar"></i>
             <h3>Journaling</h3>
             <p>Write about your emotions, feelings, mood for the day using the calendar feature.</p>
-            <a href="calendar.html" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <a href="calendar.php" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-plus-square"></i>
             <h3>Expert Doctors</h3>
-            <p>You can book an appointment as per your needs with our experienced panel of doctors and professional help.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <p>You can book an appointment as per your needs with our experienced panel of doctors</p>
+            <a href="#appointments" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-heart"></i>
             <h3>Art Therapy </h3>
             <p>Immerse yourself into the world of art and heal from within.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <a href="events.php" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
@@ -141,8 +146,8 @@
         <div class="box">
             <i class="fas fa-newspaper"></i>
             <h3>Human Library</h3>
-            <p>This is where you will get to know that you are not alone in this thing , find passionate stories about strangers who will inspire. </p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <p>You will get to know that you are not alone here, find passionate stories about that will inspire. </p>
+            <a href="events.php" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
     </div>
@@ -160,7 +165,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="image/about-img.svg" alt="">
+            <img src="img/about-img.svg" alt="">
         </div>
 
         <div class="content">
@@ -184,7 +189,7 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="image/doc-4.jpg" alt="">
+            <img src="img/doc-4.jpg" alt="">
             <h3>Dr.Gorav Gupta</h3>
             <span>22 years of experience</span>
             <div class="share">
@@ -196,7 +201,7 @@
         </div>
 
         <div class="box">
-            <img src="image/doc-1.jpg" alt="">
+            <img src="img/doc-1.jpg" alt="">
             <h3>Dr.Vasantha Jayaraman</h3>
             <span>26 years of experience</span>
             <div class="share">
@@ -208,7 +213,7 @@
         </div>
 
         <div class="box">
-            <img src="image/doc-4.jpg" alt="">
+            <img src="img/doc-4.jpg" alt="">
             <h3>Dr.Murali Raj</h3>
             <span>35 years of experience</span>
             <div class="share">
@@ -220,7 +225,7 @@
         </div>
 
         <div class="box">
-            <img src="image/doc-4.jpg" alt="">
+            <img src="img/doc-4.jpg" alt="">
             <h3>Dr.Ajit Dandekar</h3>
             <span>35 years of experience</span>
             <div class="share">
@@ -232,7 +237,7 @@
         </div>
 
         <div class="box">
-            <img src="image/doc-4.jpg" alt="">
+            <img src="img/doc-4.jpg" alt="">
             <h3>Dr.Sameer Malhotra</h3>
             <span>23 years of experience</span>
             <div class="share">
@@ -244,7 +249,7 @@
         </div>
 
         <div class="box">
-            <img src="image/doc-1.jpg" alt="">
+            <img src="img/doc-1.jpg" alt="">
             <h3>Dr.Jyoti Maheshwari</h3>
             <span>32 years of experience</span>
             <div class="share">
@@ -270,7 +275,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="image/book-img.svg" alt="">
+            <img src="img/book-img.svg" alt="">
         </div>
 
         <form action="">
@@ -310,7 +315,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="image/blog-1.jpg" alt="">
+                <img src="img/blog-1.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -318,14 +323,14 @@
                     <a href="#"> <i class="fas fa-user"></i> by admin </a>
                 </div>
                 <h3>blogs</h3>
-                <p><hcudhal/p>
+                <p>hcudhal</p>
                 <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
             </div>
         </div>
 
         <div class="box">
             <div class="image">
-                <img src="image/blog-2.jpg" alt="">
+                <img src="img/blog-2.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -340,7 +345,7 @@
 
         <div class="box">
             <div class="image">
-                <img src="image/blog-3.jpg" alt="">
+                <img src="img/blog-3.jpg" alt="">
             </div>
             <div class="content">
                 <div class="icon">
@@ -368,11 +373,11 @@
 
         <div class="box">
             <h3>quick links</h3>
-            <a href="#"> <i class="fas fa-chevron-right"></i> home </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> Calendar</a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> Events</a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> Post </a>
-            <a href="#"> <i class="fas fa-chevron-right"></i> login </a>
+            <a href="home.php"> <i class="fas fa-chevron-right"></i> home </a>
+            <a href="calendar.php"> <i class="fas fa-chevron-right"></i> Calendar</a>
+            <a href="events.php"> <i class="fas fa-chevron-right"></i> Events</a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Posts </a>
+            <a href="log.php"> <i class="fas fa-chevron-right"></i> login </a>
         </div>
 
         <div class="box">
@@ -410,23 +415,6 @@
 </section>
 
 <!-- footer section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- custom js file link  -->
 <script src="script.js"></script>
