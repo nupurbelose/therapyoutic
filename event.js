@@ -1,3 +1,15 @@
+let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.navbar');
+
+menu.onclick = () =>{
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+}
+
+window.onscroll = () =>{
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+}
 jQuery(document).ready(function( $ ) {
 
   // Back to top button
@@ -12,27 +24,6 @@ jQuery(document).ready(function( $ ) {
     $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
     return false;
   });
-
-  // Header fixed on scroll
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 100) {
-      $('#header').addClass('header-scrolled');
-    } else {
-      $('#header').removeClass('header-scrolled');
-    }
-  });
-
-  if ($(window).scrollTop() > 100) {
-    $('#header').addClass('header-scrolled');
-  }
-
-  // Real view height for mobile devices
-  if (window.matchMedia("(max-width: 767px)").matches) {
-    $('#intro').css({ height: $(window).height() });
-  }
-
-  // Initiate the wowjs animation library
-  new WOW().init();
 
   // Initialize Venobox
   $('.venobox').venobox({
@@ -49,6 +40,8 @@ jQuery(document).ready(function( $ ) {
     },
     speed: 400
   });
+
+
 
   // Mobile Navigation
   if ($('#nav-menu-container').length) {
