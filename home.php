@@ -1,25 +1,53 @@
+<!-- php code -->
 <?php
  require 'config.php';
 if(!empty($_SESSION["id"])){
   $id = $_SESSION["id"];
-  $result = mysqli_query($conn, "SELECT * FROM signdetails WHERE id = $id");
+  $result = mysqli_query($conn, "SELECT * FROM signup WHERE id = $id");
   $row = mysqli_fetch_assoc($result);
+}
+if (isset($_POST["appoint"])) {
+    $fullname = $_POST["fullname"];
+    $phone = $_POST["phone"];
+    $Email = $_POST["Email"];
+    $doctor = $_POST["doctor"];
+    $date = $_POST["date"];
+    $time = $_POST["time"];
+    if($Email )
+        {
+        $query = "INSERT INTO ap_users VALUES('','$fullname','$phone','$Email','$doctor','$date','$time')";
+        mysqli_query($conn, $query);
+        echo
+        "<script> alert('Done!Your appointment is Booked.'); </script>";
+      }
+      else{
+        echo
+        "<script> alert('please fill out the form again'); </script>";
+      }
+      header("location: home.php");
 }
 
 ?>
+
+<!-- Html code -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TherapYOUtic </title>
+    <title>TherapYOUtic</title>
+    <link rel="icon" type="images/x-icon" href="img/logo.png" />
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="style.css">
+
+<!-- for logout -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,
+GRAD@20..48,100..700,0..1,-50..200" />
 
     
 
@@ -36,12 +64,10 @@ if(!empty($_SESSION["id"])){
         <a href="home.php">home</a>
         <a href="calendar.php">calendar</a>
         <a href="events.php">Events</a>
-        <a href="Post.html">Post</a>
-        <a href="log.php">login</a>
-        <!-- <a href="log.php" class="logout"><fas</a> -->
+        <a href="breath.php">Breath</a>
+        <a href="chatroom.php">chat</a> 
+        <a href="logout.php">logout</a> 
 
-        
-        
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -61,7 +87,7 @@ if(!empty($_SESSION["id"])){
     <div class="content">
         <h3>Your Mental Health guide</h3>
         <p>Tell us all about it, we're here for you</p>
-        <a href="contactUs.php" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
+        <a href="contact.php" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>
@@ -74,25 +100,25 @@ if(!empty($_SESSION["id"])){
 
     <div class="icons">
         <i class="fas fa-user-md"></i>
-        <h3>50+</h3>
-        <p>professionals for you</p>
+        <h3>30+</h3>
+        <p>professionals Available</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-bell"></i>
-        <h3>10+</h3>
-        <p>Events everyday</p>
+        <h3>15+</h3>
+        <p>Events for you</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-users"></i>
-        <h3>30+</h3>
-        <p>Support Groups</p>
+        <h3>1+</h3>
+        <p>chatbot</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-edit"></i>
-        <h3>20+</h3>
+        <h3>10+</h3>
         <p>Articles and more</p>
     </div>
 
@@ -119,7 +145,7 @@ if(!empty($_SESSION["id"])){
             <i class="fas fa-plus-square"></i>
             <h3>Expert Doctors</h3>
             <p>You can book an appointment as per your needs with our experienced panel of doctors</p>
-            <a href="#appointments" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <a href="#doctors" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
@@ -146,7 +172,7 @@ if(!empty($_SESSION["id"])){
         <div class="box">
             <i class="fas fa-newspaper"></i>
             <h3>Human Library</h3>
-            <p>You will get to know that you are not alone here, find passionate stories about that will inspire. </p>
+            <p>You'll get to know that you are not alone here, find passionate stories that will inspire. </p>
             <a href="events.php" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
@@ -170,8 +196,14 @@ if(!empty($_SESSION["id"])){
 
         <div class="content">
             <h3>we take care of your healthy life</h3>
-            <p>paragraph</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <p>We are a user-friendly website, that promotes the health and fitness of your 
+mind and body. Traditional clinic-based services are inaccessible and expensive for many 
+people therefore not many people are used to treating mental health issues. We will 
+help our users heal themselves, show personal progress, and support. It will have several 
+features which will analyze the user’s growth and give appropriate guidance. Considering 
+the age of the user and the issues they commonly face, their chosen preferences will 
+recommend activities, suggestions, and support groups accordingly.</p>
+            <a href="#services" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
     </div>
@@ -278,13 +310,13 @@ if(!empty($_SESSION["id"])){
             <img src="img/book-img.svg" alt="">
         </div>
 
-        <form action="">
+        <form action="#appointments" method="post" autocomplete="off">
             <h3>book appointments</h3>
-            <input type="text" placeholder="Full Name" class="box">
-            <input type="number" placeholder="Mobile Number" class="box">
-            <input type="email" placeholder="Email Address" class="box">
-            <input type="text" placeholder="Age" class="box">
-            <select name="Doctors" id="Doctors" class="box">
+            <input type="text" placeholder="Full Name" class="box" name="fullname">
+            <input type="number" placeholder="Mobile Number" class="box" name="phone">
+            <input type="email" placeholder="Email Address" class="box"  name="Email">
+
+            <select id="Doctors" class="box" name="doctor">
             <option value="">Select a Doctor to Appoint</option>
             <option value="Dr.Gorav Gupta">Dr.Gorav Gupta</option>
             <option value="Dr.Vasantha Jayaraman">Dr.Vasantha Jayaraman</option>
@@ -293,9 +325,9 @@ if(!empty($_SESSION["id"])){
             <option value="Dr.Sameer Malhotra">Dr.Sameer Malhotra</option>
             <option value="Dr.Jyoti Maheshwari">Dr.Jyoti Maheshwari</option>
             </select>
-            <input type="date" class="box">
-            <input type="time" class="box">
-            <input type="submit" value="book now" class="btn">
+            <input type="date" class="box" name="date">
+            <input type="time" class="box" name="time">
+            <input type="submit" value="book now" class="btn" name="appoint">
         </form>
 
     </div>
@@ -323,8 +355,8 @@ if(!empty($_SESSION["id"])){
                     <a href="#"> <i class="fas fa-user"></i> by admin </a>
                 </div>
                 <h3>blogs</h3>
-                <p>hcudhal</p>
-                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+                <p></p>
+                <a href="blogs/blogs.html" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
             </div>
         </div>
 
@@ -338,8 +370,8 @@ if(!empty($_SESSION["id"])){
                     <a href="#"> <i class="fas fa-user"></i> by admin </a>
                 </div>
                 <h3>videos</h3>
-                <p>hfakcascgl</p>
-                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+                <p></p>
+                <a href="videos/videos.html" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
             </div>
         </div>
 
@@ -352,9 +384,9 @@ if(!empty($_SESSION["id"])){
                     <a href="#"> <i class="fas fa-calendar"></i> 1st may, 2021 </a>
                     <a href="#"> <i class="fas fa-user"></i> by admin </a>
                 </div>
-                <h3>articles</h3>
-                <p>Lhscacgacia</p>
-                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+                <h3>podcasts</h3>
+                <p></p>
+                <a href="podcasts/" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
             </div>
         </div>
 
