@@ -1,3 +1,3 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "signup");
+$conn = mysqli_connect("localhost", "root", "", "thrapyoutic");
