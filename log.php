@@ -1,3 +1,4 @@
+ <!-- signup php -->
 <?php
 require "config.php";
 if(!empty($_SESSION["id"])){
@@ -8,17 +9,17 @@ if(isset($_POST["submitbtn"])){
   $email = $_POST["email"];
   $password = $_POST["password"];
   $confirmpass = $_POST["confirmpass"];
-  $duplicate = mysqli_query($conn, "SELECT * FROM signdetails WHERE username = '$username' OR email = '$email'");
+  $duplicate = mysqli_query($conn, "SELECT * FROM signup WHERE username = '$username' OR email = '$email'");
   if(mysqli_num_rows($duplicate) > 0){
     echo
     "<script> alert('Username or Email Has Already Taken'); </script>";
   }
   else{
     if($password == $confirmpass){
-      $query = "INSERT INTO signdetails VALUES('','$username','$email','$password','$confirmpass')";
+      $query = "INSERT INTO signup VALUES('','$username','$email','$password','$confirmpass')";
       mysqli_query($conn, $query);
       echo
-      "<script> alert('welcome!'); </script>";
+      "<script> alert('Welcome!'); </script>";
     }
     else{
       echo
@@ -26,14 +27,14 @@ if(isset($_POST["submitbtn"])){
     }
   }
 }
-//  require 'config.php';
+//  login php
 if(!empty($_SESSION["id"])){
   header("Location: log.php");
 }
 if(isset($_POST["loginbtn"])){
   $username = $_POST["username"];
   $password = $_POST["password"];
-  $result = mysqli_query($conn, "SELECT * FROM signdetails WHERE username = '$username'");
+  $result = mysqli_query($conn, "SELECT * FROM signup WHERE username = '$username'");
   $row = mysqli_fetch_assoc($result);
   if(mysqli_num_rows($result) > 0){
     if($password == $row['password']){
@@ -48,7 +49,7 @@ if(isset($_POST["loginbtn"])){
   }
   else{
     echo
-    "<script> alert('User Not Registered'); </script>";
+    "<script> alert('Oops!you've to register yourself.'); </script>";
   }
 }
 ?>
@@ -56,8 +57,9 @@ if(isset($_POST["loginbtn"])){
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
-      <title>Login</title>
-      <!-- font awesome cdn link  -->
+      <title>TherapYOUtic</title>
+    <link rel="icon" type="images/x-icon" href="img/logo.png" />
+          <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
       <link rel="stylesheet" href="log.css">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,15 +73,10 @@ if(isset($_POST["loginbtn"])){
    <a href="log.php" class="logo"> <i class="fas fa-heartbeat"></i> TherapYOUtic </a>
    
    <nav class="navbar">
-       <a href="home.php">home</a>
-       <!-- <a href="#services">services</a>
-       <a href="#about">about</a>
-       <a href="#doctors">doctors</a>
-       <a href="#appointments">appointments</a> -->
-       <!-- <a href="#insights">insights</a> -->
-       <a href="calendar.php">calendar</a>
-       <a href="events.php">Events</a>
-       <a href="Post.html">Post</a>
+       <a href="indexhome.php">home</a>
+       <!-- <a href="">calendar</a>
+       <a href="">Events</a>
+       <a href="">Post</a> -->
        <a href="log.php">login</a>  
        
    </nav>
@@ -142,7 +139,7 @@ if(isset($_POST["loginbtn"])){
             </div>
          </div>
       </div>
-
+      <div class="credit"> created by <span>Nupur & Sherin</span> </div>
       <script>
          const loginText = document.querySelector(".title-text .login");
          const loginForm = document.querySelector("form.login");
